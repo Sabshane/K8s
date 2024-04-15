@@ -2,6 +2,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: nginx-deployment
+  ## serves as a connecting method by the service to
+  ## know wich pods are registered with it
   labels:
     app: nginx
 spec:
@@ -10,10 +12,12 @@ spec:
     matchLabels:
       app: nginx
   template:
+  ## this applies to the pods
     metadata:
       labels:
         app: nginx
     spec:
+    ## blueprint for the pod
       containers:
       - name: nginx
         image: nginx:1.16
@@ -22,4 +26,5 @@ spec:
             memory: "128Mi"
             cpu: "500m"
         ports:
-        - containerPort: 80
+        ## this should match the service target port
+        - containerPort: 8080
