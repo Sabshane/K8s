@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: custom-ingress
+  namespace: custom-namespace
+spec:
+  rules:
+  - host: kekus.com
+  - http:
+      paths:
+      - path: /wassup
+        pathType: Exact
+        backend:
+          service:
+            name: custom-namespace
+            port:
+              number: 8081
